@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TicketRequestModule } from './ticket-request/ticket-request.module';
+import { Indicador4Module } from './indicador4/indicador4.module'; 
 import { TicketRequest } from './ticket-request/ticket-request';
-import { TicketRequestService } from './ticket-request/ticket-request.service';
-import { TicketRequestController } from './ticket-request/ticket-request.controller';
+import { Indicador7Module } from './indicador7/indicador7.module';
 
 @Module({
   imports: [
@@ -16,10 +17,11 @@ import { TicketRequestController } from './ticket-request/ticket-request.control
       entities: [TicketRequest],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([TicketRequest]),
+    TicketRequestModule,
+    Indicador4Module,
+    Indicador7Module,    
   ],
-  controllers: [TicketRequestController],
-  providers: [TicketRequestService],
+  controllers: [],
+  providers: [],
 })
-
 export class AppModule {}
