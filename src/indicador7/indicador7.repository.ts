@@ -11,23 +11,35 @@ export class Indicador7Repository {
     ) {}
 
     async getImplementationPercentage(): Promise<any> {
-        const closed = await this.ticketRequestRepository.count({
-            where: { status: 'closed' },
-        });
 
-        const resolved = await this.ticketRequestRepository.count({
-            where: { status: 'resolved' },
-        });
+        const statuses = [
+            'approved', 'assigned', 'closed', 'dispatched', 'escalated_tto', 
+            'escalated_ttr', 'new', 'pending', 'redispatched', 'rejected', 
+            'resolved', 'waiting_for_approval'
+        ];
 
-        const total = await this.ticketRequestRepository.count({});
+        const counts = await Promise.all(
+            statuses.map(status => this.ticketRequestRepository.count({ where: { status } }))
+        );
 
-        const percentage =  ((closed+resolved)/total) * 100;
+        const total = counts.reduce((acc, count) => acc + count, 0);
+        
+        const closed = counts[statuses.indexOf('closed')];
+
+        const resolved = counts[statuses.indexOf('resolved')];
+
+        const percentage = ((closed + resolved) / total) * 100;
+
+        const result = statuses.reduce((acc, status, index) => {
+            acc[status] = counts[index];
+            return acc;
+        }, {});
 
         return {
-            closed,
-            resolved,
+            ...result,
             total,
             percentage,
         };
+    
     }
 }

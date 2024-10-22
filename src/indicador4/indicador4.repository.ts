@@ -11,12 +11,31 @@ export class Indicador4Repository {
     ) {}
 
     async getSatisfactionLevels(): Promise<any> {
-        return this.ticketRequestRepository
+        const satisfactionLevels = await this.ticketRequestRepository
             .createQueryBuilder('ticket_request')
             .select('ticket_request.user_satisfaction', 'user_satisfaction')
             .addSelect('COUNT(*)', 'total')
             .groupBy('ticket_request.user_satisfaction')
             .getRawMany();
+    
+        const allSatisfactionLevels = {
+            1: 0,
+            2: 0,
+            3: 0,
+            4: 0
+        };
+    
+        satisfactionLevels.forEach(level => {
+            allSatisfactionLevels[level.user_satisfaction] = parseInt(level.total, 10);
+        });
+
+        const result = Object.keys(allSatisfactionLevels).map(key => ({
+            user_satisfaction: key,
+            total: allSatisfactionLevels[key]
+        }));
+    
+        return result;
     }
+    
 }
 

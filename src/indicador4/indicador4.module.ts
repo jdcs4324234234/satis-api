@@ -8,6 +8,6 @@ import { TicketRequest } from 'src/ticket-request/ticket-request';
 @Module({
     imports: [TypeOrmModule.forFeature([TicketRequest])],
     controllers: [Indicador4Controller],
-    providers: [Indicador4Service, Indicador4Repository], // Asegúrate de incluir el repositorio aquí
+    providers: [Indicador4Service, Indicador4Repository], 
 })
 export class Indicador4Module {}
