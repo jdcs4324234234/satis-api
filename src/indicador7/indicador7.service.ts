@@ -8,4 +8,12 @@ export class Indicador7Service {
     async getImplementationPercentage() {
         return this.indicador7Repository.getImplementationPercentage();
     }
+
+    async getRequirementsperState() {
+        return this.indicador7Repository.getRequirementsperState();
+    }
+
+    async getResolutionMetrics() {
+        return this.indicador7Repository.getResolutionMetrics();
+    }
 }
