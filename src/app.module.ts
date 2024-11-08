@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TicketRequestModule } from './ticket-request/ticket-request.module';
 import { Indicador4Module } from './indicador4/indicador4.module'; 
 import { TicketRequest } from './ticket-request/ticket-request';
-import { Indicador7Module } from './indicador7/indicador7.module';
+import { RequirementsModule } from './requirements/requirements.module';
 
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { Indicador7Module } from './indicador7/indicador7.module';
     }),
     TicketRequestModule,
     Indicador4Module,
-    Indicador7Module,    
+    RequirementsModule,    
   ],
   controllers: [],
   providers: [],

@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { TicketRequest } from '../ticket-request/ticket-request';
 
 @Injectable()
-export class Indicador7Repository {
+export class RequirementsRepository {
     constructor(
         @InjectRepository(TicketRequest)
         private readonly ticketRequestRepository: Repository<TicketRequest>,
